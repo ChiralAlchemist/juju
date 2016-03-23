@@ -136,7 +136,8 @@ angular.module('itemFactory', [])
   //group the itemData based on itemId 
   for(var entryId in itemHistory) {
     aHistory = itemHistory[entryId];
-    itemId = itemHistory[entryId].itemid;
+    console.log(aHistory)
+    itemId = itemHistory[entryId].nickname;
     orgData[itemId] !==undefined ? orgData[itemId].push(aHistory) : orgData[itemId] = [aHistory]
   }
   
@@ -174,7 +175,7 @@ angular.module('itemFactory', [])
       pricesArray.push(Number(itemData[i].price.slice(1)));
     }
   }
-  graphData.push([datesArray, [pricesArray ]]);
+  graphData.push([datesArray, [pricesArray]]);
   return graphData;
 }
 

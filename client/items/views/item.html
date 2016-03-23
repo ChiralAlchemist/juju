@@ -8,7 +8,7 @@
     </div>
     <div class="row"  >
       <div class="col-sm-4 portfolio-item" ng-repeat = "item in itemData" >
-        <button ng-click='open(item.itemid)' class="portfolio-link" data-toggle="modal" data-target="#myModal" >
+        <button ng-click='open(item.nickname)' class="portfolio-link" data-toggle="modal" data-target="#myModal" >
         <!-- <div class="caption">
           <div class="caption-content">
             <i class="fa fa-search-plus fa-3x"></i>
@@ -19,10 +19,11 @@
         
         <script type="text/ng-template" id="myModalContent.html">
         <div class="modal-header">
-          <h3 class="modal-title">Im a modal!</h3>
+          <h3 class="modal-title">{{ itemid + " price over time" }}!</h3>
         </div>
         <div class="modal-body">
-          <canvas id="line" class="chart chart-line" chart-data="itemHistoryData[itemid].priceGraph[0][1]"
+          <h1 ng-show='errMessage' class ='ng-hide'> Not Enough Data </h1>
+          <canvas  id="line" class="chart chart-line" chart-data="itemHistoryData[itemid].priceGraph[0][1]"
           chart-labels="itemHistoryData[itemid].priceGraph[0][0]" chart-legend="true" chart-series="series"
           chart-click="onClick" >
           </canvas>

@@ -32,6 +32,7 @@ angular.module('displayItemsController', [])
   };  
     
   $scope.deleteWatched = function(itemId){
+    
     displayItemsFactory.deleteData(itemId);
   };
 
@@ -54,10 +55,7 @@ angular.module('displayItemsController', [])
     console.log(points, evt);
   };
 
-  $scope.open = function (size) {
-    console.log('open called')
-    console.log('size is ', size)
-    var testingr = size;
+  $scope.open = function (nikename) {
     var modalInstance = $uibModal.open({
       animation: $scope.animationsEnabled,
       templateUrl: 'myModalContent.html',
@@ -67,35 +65,25 @@ angular.module('displayItemsController', [])
       windowTemplateUrl : '/scripts/angular-ui-bootstrap/template/modal/window.html',
     //  scope: $scope.item = size ,
       resolve: {
-        simpleObj : {value: size}
+        simpleObj : {value: nikename , itemHistory: $scope.itemHistoryData }
       }
     });
   };
 
 })
 .controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, Auth , displayItemsFactory , simpleObj) {
-  //console.log('testingr is', testingr)
-  // $scope.items = items;
-  // $scope.selected = {
-  //   item: $scope.items[0]
-  // };
-
-  // $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-  // $scope.series = ['Series A', 'Series B'];
-  // $scope.data = [
-  //   [65, 59, 80, 81, 56, 55, 40],
-  //   [28, 48, 40, 19, 86, 27, 90]
-  // ];
-
   console.log(simpleObj.value)
   $scope.itemid = simpleObj.value;
-  displayItemsFactory.getItemHistoryData(Auth.userId)
-  .then(
-    function successCallback(response) {
-      console.log(response.data)
-      $scope.itemHistoryData = displayItemsFactory.organizeData(response.data);
-      console.log('orgdata is ', $scope.itemHistoryData)
-    });
+  $scope.itemHistoryData = simpleObj.itemHistory;
+  $scope.lackofData = false;
+  $scope.errMessage = false;
+
+  if($scope.itemHistoryData[$scope.itemid].priceGraph[0][0].length<4){
+    console.log($scope.itemHistoryData[$scope.itemid].priceGraph[0][0].length)
+    $scope.lackofData = true;
+    $scope.errMessage = true;
+  }
+  
   $scope.ok = function () {
     $uibModalInstance.close();
   };
