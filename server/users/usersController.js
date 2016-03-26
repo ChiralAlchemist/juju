@@ -70,6 +70,10 @@ module.exports = {
   userOneUserInfo : function(req, res){
     var results = [];
     var id = req.params.user_id;
+    
+    if( isNaN(Number(id))) {
+      res.send("Error : Tried to send NaN to api/users/:user_id")
+    }
 
     pg.connect(connectionString, function(err, client, done){
       if(err){
@@ -99,7 +103,9 @@ module.exports = {
 
     // Grab data from the URL parameters
     var id = req.params.user_id;
-
+    if( isNaN(Number(id))) {
+      res.send("Error : Tried to send NaN to api/users/:user_id")
+    }
     // Grab data from http request
     var data = {
       email: req.body.email,
