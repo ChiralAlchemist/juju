@@ -47,13 +47,7 @@
                 <p class="form-instructions">Enter full item URL</p>
                 <input type="text" name="itemURL" class="form-control" id="inputSuccess2" aria-describedby="inputSuccess2Status" ng-model="item.URL"
                  placeholder="example: https://www.amazon.com/path/to/your/item"
-                 required ng-pattern="/(
-                   ae|crateandbarrel|
-                   disneystore|costco|
-                   neimanmarcus|
-                   barnesandnoble|target|
-                   amazon|nordstrom
-                   ).com/">
+                 required ng-pattern="/(ae|crateandbarrel|disneystore|costco|neimanmarcus|barnesandnoble|target|amazon|nordstrom).com/">
                  <span class="glyphicon glyphicon-ok form-control-feedback" ng-hide="addItemForm.itemURL.$error.required || addItemForm.itemURL.$error.pattern"></span>
                 <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="addItemForm.itemURL.$error.required || addItemForm.itemURL.$error.pattern"></span>
                 <span class="help-block" ng-show="addItemForm.itemURL.$error.required">Required</span>
